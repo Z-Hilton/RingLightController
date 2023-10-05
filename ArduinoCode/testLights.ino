@@ -23,7 +23,8 @@ void setup() {
   strip.setBrightness(BRIGHTNESS);
   strip.show();  // Initialize all pixels to off
 
-
+// WARNING DO NOT USE ANALOG WRITE! YOU WILL BRICK THE ESP32.
+// I found out the hard way...
   // analogWrite(23, 50); 
   // analogWrite(21, 50);
   // analogWrite(19, 50);
