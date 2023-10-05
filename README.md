@@ -17,19 +17,19 @@ The Ringlight Controller is a device designed to control a ringlight, which is o
 
 ## 2. Components
 
-### 2.1 Mosfets (6)
+#### 2.1 Mosfets (6)
 
 - These are electronic switches that control the flow of electrical current. There are six of them on the board.
 
-### 2.2 Buck Converter
+#### 2.2 Buck Converter
 
 - This component steps down the input voltage from 24V to 5V. It provides power to both the ESP32 and the RGB LED strip.
 
-### 2.3 ESP32
+#### 2.3 ESP32
 
 - This is the brain of the controller. It's a microcontroller responsible for detecting the shutter signal and controlling the Mosfets accordingly.
 
-### 2.4 RGB LED Strip
+#### 2.4 RGB LED Strip
 
 - The RGB LED strip provides colorful lighting effects. It is powered by the 5V output from the Buck Converter.
 
