@@ -15,6 +15,14 @@ Welcome to the Ringlight Controller documentation! This guide will help you unde
 
 The Ringlight Controller is a device designed to control a ringlight, which is often used for photography and video lighting. This controller is built around an ESP32 microcontroller and is capable of turning on and off the ringlight's LEDs in sync with a shutter signal.
 
+###### Design Choices
+This project from the start was meant to be done
+* as fast as possible
+* as simple as possible
+* as robust as possible (i.e. can be easily improved upon later)
+
+This means that there are potentially lots of optimizations that could be made, as I chose parts I am most familiar with and think that most people will find easy to use. Below I will provide a brief description of how the board works, piece by piece.
+
 ## 2. Components
 
 #### 2.1 Mosfets (6)
@@ -29,14 +37,18 @@ The Ringlight Controller is a device designed to control a ringlight, which is o
 
 - This is the brain of the controller. It's a microcontroller responsible for detecting the shutter signal and controlling the Mosfets accordingly.
 
-#### 2.4 RGB LED Strip
+#### 2.4 JST connectors (6, 2-pins)
 
-- The RGB LED strip provides colorful lighting effects. It is powered by the 5V output from the Buck Converter.
+- Each of these go to a bank of 6 LEDs. 
+  
+#### 2.5 JST connector (1, 3-pin)
+
+- The three pins are ground, data, and power (5V). They go to the individually addressable RGB LEDs on the ringlight. 
 
 ## 3. Power Supply
 
-The Ringlight Controller requires a 24V power source. Here's how the power flows through the board:
-
+The board expects an input of 24 Volts throught a **_center-positive_** DC barrel jack. You can check to see if your power source is center-positive by placing the red probe of a volt meter in the center of the plug and the black probe on the sleeve. If the number is positive you are all good. (This is important as there is no standard and center-negative is quite common too). The power supplies we are using for the photogrammetry rig are center-positive, so if you are a Makerspace employee reading this, no need to worry about this.
+Again, here's how the power flows through the board:
 - The 24V power goes into the board.
 - A Buck Converter steps down the voltage to 5V.
 - The 5V output powers both the ESP32 and the RGB LED strip.
@@ -47,11 +59,9 @@ The ESP32 is the heart of the controller. It performs the following tasks:
 
 - **Detect Shutter Signal:** The ESP32 listens for a shutter signal coming from a 3.5mm headphone jack on the board. This signal tells the controller when to turn on the ringlight.
 
-- **Control Mosfets:** When the shutter signal is detected, the ESP32 sends a signal to the Mosfets to turn them on. This allows the 24V power to flow to the LED banks.
+- **Control Mosfets:** When the shutter signal is detected, the ESP32 sends a signal to the Mosfets to turn them on. This allows the 24V power to flow to the white LED banks.
 
-## 5. RGB LED Strip
-
-The RGB LED strip is an optional component that can provide colorful lighting effects. It is powered by the 5V output from the Buck Converter.
+- **Control RGB LEDs** The ESP32 uses just one pin to control all 24 RGB LEDs of the ringlight. There are a couple of libraries you can use in the Arduino IDE to control them, with NEOpixel being arguably the easiest.
 
 ## 6. Operation
 
@@ -67,6 +77,9 @@ Here's how the Ringlight Controller operates in simple terms:
 
 5. **Ringlight Illumination:** The ringlight's LEDs turn on, providing the desired lighting for your photography or video.
 
-Remember to disconnect the power source when not in use to ensure safety and conserve power.
+# WARNING!!!
 
-That's it! You now have a basic understanding of how the Ringlight Controller works. Enjoy using your ringlight for stunning photography and video projects!
+- NEVER PLUG ANYTHING INTO THE USB IF THE BOARD IS BEING POWERED BY THE 24V BARREL JACK. IT WILL DESTROY THE ESP32 AND MAYBE THE COMPUTER PORT
+- If/When you reprogram the board, make 1,000,000% sure that the 24V is UNplugged. The board will power up from just the usb, but the ringlights won't light up, and that is fine. 
+
+That's it! You now have a basic understanding of how the Ringlight Controller works.
