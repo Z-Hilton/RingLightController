@@ -35,26 +35,6 @@ This means that there are potentially lots of optimizations that could be made, 
 
 #### 2.3 ESP32
 
-- This is the brain of the controller. It's a microcontroller responsible for detecting the shutter signal and controlling the Mosfets accordingly.
-
-#### 2.4 JST connectors (6, 2-pins)
-
-- Each of these go to a bank of 6 LEDs. 
-  
-#### 2.5 JST connector (1, 3-pin)
-
-- The three pins are ground, data, and power (5V). They go to the individually addressable RGB LEDs on the ringlight. 
-
-## 3. Power Supply
-
-The board expects an input of 24 Volts throught a **_center-positive_** DC barrel jack. You can check to see if your power source is center-positive by placing the red probe of a volt meter in the center of the plug and the black probe on the sleeve. If the number is positive you are all good. (This is important as there is no standard and center-negative is quite common too). The power supplies we are using for the photogrammetry rig are center-positive, so if you are a Makerspace employee reading this, no need to worry about this.
-Again, here's how the power flows through the board:
-- The 24V power goes into the board.
-- A Buck Converter steps down the voltage to 5V.
-- The 5V output powers both the ESP32 and the RGB LED strip.
-
-## 4. ESP32 Microcontroller
-
 The ESP32 is the heart of the controller. It performs the following tasks:
 
 - **Detect Shutter Signal:** The ESP32 listens for a shutter signal coming from a 3.5mm headphone jack on the board. This signal tells the controller when to turn on the ringlight.
@@ -62,6 +42,32 @@ The ESP32 is the heart of the controller. It performs the following tasks:
 - **Control Mosfets:** When the shutter signal is detected, the ESP32 sends a signal to the Mosfets to turn them on. This allows the 24V power to flow to the white LED banks.
 
 - **Control RGB LEDs** The ESP32 uses just one pin to control all 24 RGB LEDs of the ringlight. There are a couple of libraries you can use in the Arduino IDE to control them, with NEOpixel being arguably the easiest.
+- For its dimensions and pinout, go [here.](https://docs.ai-thinker.com/en/esp32/boards/nodemcu_32s) Don't worry about anything else on that page, we program it using the Arduino IDE, which is much simpler than the process described by the manufacturer.
+
+#### 2.4 JST connectors (6, 2-pins)
+
+- Each of these go to a bank of 6 LEDs. 
+  
+#### 2.5 JST connector (1, 3-pin)
+
+- The three pins are ground, data, and power (5V). They go to the individually addressable RGB LEDs on the ringlight.
+- 
+#### 2.6 3.5mm Jack
+
+- Gets the signal from the camera
+
+#### 2.7 Barrel Jack
+
+- Gets power to the buck converter and ESP32
+
+## 3. Supplying Power
+
+The board expects an input of 24 Volts throught a **_center-positive_** DC barrel jack. You can check to see if your power source is center-positive by placing the red probe of a volt meter in the center of the plug and the black probe on the sleeve. If the number is positive you are all good. (This is important as there is no standard and center-negative is quite common too). The power supplies we are using for the photogrammetry rig are center-positive, so if you are a Makerspace employee reading this, no need to worry about this.
+Again, here's how the power flows through the board:
+- The 24V power goes into the board.
+- A Buck Converter steps down the voltage to 5V.
+- The 5V output powers both the ESP32 and the RGB LED strip.
+
 
 ## 6. Operation
 
