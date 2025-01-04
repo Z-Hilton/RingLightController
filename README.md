@@ -97,3 +97,9 @@ Here's how the Ringlight Controller operates in simple terms:
 - If/When you reprogram the board, make 100% sure that the 24V is unplugged. The board will power up from just the usb, but the ringlights won't light up, and that is fine. 
 
 That's it! You now have a basic understanding of how the Ringlight Controller works.
+
+
+
+## Comments on the code
+- testLights.ino is a simple working version of the code that simply flashes the lights when it detects the shutter has opened. 
+- RCP (which stands for Ringlight Control Protocol) is an implementation of a way to wirelessly change the settings (ie flash duration, flash color, etc.) of each of the boards without having to plug in to each board individually, as that proves VERY tedious. esp32's were chosen because of their WiFi capabilities.
