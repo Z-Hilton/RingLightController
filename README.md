@@ -102,4 +102,4 @@ That's it! You now have a basic understanding of how the Ringlight Controller wo
 
 ## Comments on the code
 - testLights.ino is a simple working version of the code that simply flashes the lights when it detects the shutter has opened. 
-- RCP (which stands for Ringlight Control Protocol) is an implementation of a way to wirelessly change the settings (ie flash duration, flash color, etc.) of each of the boards without having to plug in to each board individually, as that proves VERY tedious. esp32's were chosen because of their WiFi capabilities.
+- RCP (which stands for Ringlight Control Protocol) is an implementation of a way to wirelessly change the settings (ie flash duration, flash color, etc.) of each of the boards without having to plug in to each board individually, as that proves VERY tedious. esp32's were chosen because of their WiFi capabilities. The sender code runs on a separate esp32 outside the rig, and the receiver code is meant to be ran on all the boards on the rig. Currently, none of the esp32s in the rig have this code on them because the RCP code was/is still under development. 
