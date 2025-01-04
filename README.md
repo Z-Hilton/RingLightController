@@ -27,11 +27,14 @@ This means that there are potentially lots of optimizations that could be made, 
 
 #### 2.1 Mosfets (6)
 
-- These are electronic switches that control the flow of electrical current. There are six of them on the board.
+- These are electronic switches that control the flow of electrical current. There are six of them on the board (circled in red below)
+<img src="./Photos/mosfets.png" alt="Mosfets" width="500"/>
+
 
 #### 2.2 Buck Converter
 
-- This component steps down the input voltage from 24V to 5V. It provides power to both the ESP32 and the RGB LED strip.
+- This component steps down the input voltage from 24V to 5V. It provides power to both the ESP32 and the 3-pin RGB LED strip (not the 2-pin white leds, those need the full 24V). I refer to the entire blue PCB as one component - the buck converter. These can be bought for under a dollar at the BYU ECE shop (Northeast corner of the 4th floor of the Clyde building) or online. You can tune the output voltage using a small flat screwdriver. I have tuned them to output 5V, which can be checked using a handheld voltmeter.
+<img src="./Photos/buck.png" alt="Buck" width="500"/>
 
 #### 2.3 ESP32
 
@@ -43,22 +46,27 @@ The ESP32 is the heart of the controller. It performs the following tasks:
 
 - **Control RGB LEDs** The ESP32 uses just one pin to control all 24 RGB LEDs of the ringlight. There are a couple of libraries you can use in the Arduino IDE to control them, with NEOpixel being arguably the easiest.
 - For its dimensions and pinout, go [here.](https://docs.ai-thinker.com/en/esp32/boards/nodemcu_32s) Don't worry about anything else on that page, we program it using the Arduino IDE, which is much simpler than the process described by the manufacturer.
+<img src="./Photos/esp32.png" alt="esp" width="500"/>
 
 #### 2.4 JST connectors (6, 2-pins)
 
-- Each of these go to a bank of 6 LEDs. 
+- Each of these go to a bank of 6 LEDs on the ringlight board that is mounted to a camera.
+<img src="./Photos/2pin.png" alt="2pin" width="500"/>
   
 #### 2.5 JST connector (1, 3-pin)
 
 - The three pins are ground, data, and power (5V). They go to the individually addressable RGB LEDs on the ringlight.
-- 
+<img src="./Photos/3pin.png" alt="3pin" width="500"/>
+  
 #### 2.6 3.5mm Jack
 
 - Gets the signal from the camera
+<img src="./Photos/3.5mm.png" alt="3.5mm" width="500"/>
 
 #### 2.7 Barrel Jack
 
 - Gets power to the buck converter and ESP32
+<img src="./Photos/barrelJack.png" alt="barrelJack" width="500"/>
 
 ## 3. Supplying Power
 
@@ -85,7 +93,7 @@ Here's how the Ringlight Controller operates in simple terms:
 
 # WARNING!!!
 
-- NEVER PLUG ANYTHING INTO THE USB IF THE BOARD IS BEING POWERED BY THE 24V BARREL JACK. IT WILL DESTROY THE ESP32 AND MAYBE THE COMPUTER PORT
-- If/When you reprogram the board, make 1,000,000% sure that the 24V is UNplugged. The board will power up from just the usb, but the ringlights won't light up, and that is fine. 
+- NEVER PLUG ANYTHING INTO THE MICROUSB IF THE BOARD IS BEING POWERED BY THE 24V BARREL JACK. IT WILL DESTROY THE ESP32 AND MAYBE THE COMPUTER PORT
+- If/When you reprogram the board, make 100% sure that the 24V is unplugged. The board will power up from just the usb, but the ringlights won't light up, and that is fine. 
 
 That's it! You now have a basic understanding of how the Ringlight Controller works.
