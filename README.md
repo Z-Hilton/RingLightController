@@ -89,14 +89,14 @@ Here's how the Ringlight Controller operates in simple terms:
 
 4. **Mosfet Activation:** The Mosfets turn on, allowing the 24V power to flow to the LED banks in the ringlight.
 
-5. **Ringlight Illumination:** The ringlight's LEDs turn on, providing the desired lighting for your photography or video.
+5. **Ringlight Illumination:** The ringlight's LEDs turn on, and we have lighting.
 
 # WARNING!!!
 
 - NEVER PLUG ANYTHING INTO THE MICROUSB IF THE BOARD IS BEING POWERED BY THE 24V BARREL JACK. IT WILL DESTROY THE ESP32 AND MAYBE THE COMPUTER PORT
 - If/When you reprogram the board, make 100% sure that the 24V is unplugged. The board will power up from just the usb, but the ringlights won't light up, and that is fine. 
 
-That's it! You now have a basic understanding of how the Ringlight Controller works.
+That's it! You should now understand each part of how the Ringlight Controller works.
 
 
 
